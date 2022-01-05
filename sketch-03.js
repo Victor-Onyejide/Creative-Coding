@@ -13,7 +13,7 @@ const settings = {
 
 const sketch = ({ context, width, height }) => {
   const agents = [];
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 350; i++) {
     const x = random.range(0, width);
     const y = random.range(0,height);
 
@@ -22,13 +22,12 @@ const sketch = ({ context, width, height }) => {
   }
 
   return ({ context, width, height }) => {
-    context.fillStyle = '#E6FF4D';
+    // context.fillStyle = '#346694';
+    context.fillStyle = 'purple';
+
     context.fillRect(0, 0, width, height);
     
-    // const agentA = new Agent (800,400);
-    // const agentB = new Agent (300,700);
-    // agentA.draw(context);
-    // agentB.draw(context);
+
 
     for (let i = 0; i < agents.length; i ++){
       const agent = agents[i];
@@ -38,14 +37,13 @@ const sketch = ({ context, width, height }) => {
 
         const dist = agent.pos.getDistance(other.pos);
         if (dist > 200) continue;
-        context.lineWidth = math.mapRange(dist,0,200, 12,1);
+        context.lineWidth = math.mapRange(dist,0,200, 1,0.1);
 
         context.beginPath();
-        // context.fillStyle = 'yellow';
       
 
         context.moveTo(agent.pos.x,agent.pos.y);
-        // context.fillStyle = 'yellow';
+        context.strokeStyle = 'gold';
 
         context.lineTo(other.pos.x,other.pos.y);
 
@@ -89,10 +87,10 @@ class Agent {
   constructor(x,y) {
     this.pos = new Vector(x,y);
     this.vel = new Vector(random.range(-1,1) ,random.range(-1,1));
-    this.radius= random.range(4,12);
+    // this.radius= random.range(,12);
 
     // this.radius = 10;
-    this.radius = random.range(5,100);
+    this.radius = random.range(0.1,3);
   }
 
 
@@ -112,7 +110,7 @@ bounce (width,height){
 
     draw (context) {
 
-    // context.fillStyle = 'yellow';
+    context.fillStyle = 'white';
 
       context.save();
       context.translate(this.pos.x, this.pos.y);
